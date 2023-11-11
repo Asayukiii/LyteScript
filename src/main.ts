@@ -17,13 +17,13 @@ interface String {
 String.prototype.escape = function() {
     let text = this
     for (const escaper of escapers)
-        text = text.replace(escaper[1], escaper[0])
+        text = text.replace(new RegExp(`${escaper[1]}`, 'ig'), escaper[0])
     return text
 }
 
 String.prototype.unescape = function() {
     let text = this
     for (const escaper of escapers)
-        text = text.replace(escaper[0], escaper[1])
+        text = text.replace(new RegExp(`${escaper[0]}`, 'ig'), escaper[1])
     return text
 }
