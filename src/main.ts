@@ -1,3 +1,14 @@
+import { NativeFunction } from './structs/NativeFunction.js'
+import { FunctionManager } from './managers/Function.js'
+import { Interpreter } from './core/Interpreter.js'
+import { Condition } from './core/Condition.js'
+import { Context } from './structs/Context.js'
+import { Compiler } from './core/Compiler.js'
+import { Data } from './structs/Data.js'
+import { Util } from './utils/Util.js'
+
+import x from './extenstions' // Extended String prototype.
+
 /**
  * Character escapers to avoid bugs.
  */
@@ -9,21 +20,26 @@ const escapers = [
     ['#RIGHT#', ']']
 ]
 
-interface String {
-    escape: () => String
-    unescape: () => String
-}
-
-String.prototype.escape = function() {
-    let text = this
+function escape(text: string) {
     for (const escaper of escapers)
-        text = text.replace(new RegExp(`${escaper[1]}`, 'ig'), escaper[0])
+        text = text.toString().replace(new RegExp(`${escaper[1]}`, 'ig'), escaper[0])
     return text
 }
 
-String.prototype.unescape = function() {
-    let text = this
+function unescape(text: string) {
     for (const escaper of escapers)
-        text = text.replace(new RegExp(`${escaper[0]}`, 'ig'), escaper[1])
+        text = text.toString().replace(new RegExp(`${escaper[0]}`, 'ig'), escaper[1])
     return text
+}
+
+export {
+    escape, unescape,
+    Condition,
+    Context,
+    Compiler,
+    Data,
+    FunctionManager,
+    Interpreter,
+    NativeFunction,
+    Util
 }

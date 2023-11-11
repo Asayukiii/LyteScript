@@ -36,30 +36,30 @@ export class Condition {
                     throw new Error('Invalid operator, expected some of "' + this.symbols.join(', ') + '"')
 
                 switch (operator) {
-                    case '<': {
-                        subs[subs.length] = Number(left) < Number(right)
-                        break
-                    }
-                    case '>': {
-                        subs[subs.length] = Number(left) > Number(right)
-                        break
-                    }
-                    case '<=': {
-                        subs[subs.length] = Number(left) <= Number(right)
-                        break
-                    }
-                    case '>=': {
-                        subs[subs.length] = Number(left) >= Number(right)
-                        break
-                    }
-                    case '!=': {
-                        subs[subs.length] = left != right
-                        break
-                    }
-                    case '==': {
-                        subs[subs.length] = left == right
-                        break
-                    }
+                case '<': {
+                    subs[subs.length] = Number(left) < Number(right)
+                    break
+                }
+                case '>': {
+                    subs[subs.length] = Number(left) > Number(right)
+                    break
+                }
+                case '<=': {
+                    subs[subs.length] = Number(left) <= Number(right)
+                    break
+                }
+                case '>=': {
+                    subs[subs.length] = Number(left) >= Number(right)
+                    break
+                }
+                case '!=': {
+                    subs[subs.length] = left != right
+                    break
+                }
+                case '==': {
+                    subs[subs.length] = left == right
+                    break
+                }
                 }
             }
             results.push(subs.some(result => result === true))
