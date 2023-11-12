@@ -18,10 +18,10 @@ export interface BotOptions extends ClientOptions {
  * Represents a NiteScript bot.
  */
 export class Bot extends Client {
-    commands = new CommandManager
-    events = new EventManager
-    interpreter = new Interpreter
-    functions = new FunctionManager
+    private _commands = new CommandManager
+    private _events = new EventManager
+    private _interpreter = new Interpreter
+    private _functions = new FunctionManager
     db: Database
     extraOptions: BotOptions
     constructor(data: BotOptions) {
@@ -31,5 +31,33 @@ export class Bot extends Client {
         this.functions.loadNatives()
         this.events.loadNatives(data.events ?? [], this)
         this.db.start()
+    }
+
+    /**
+     * Get the command manager.
+     */
+    get commands() {
+        return this._commands
+    }
+
+    /**
+     * Get the event manager.
+     */
+    get events() {
+        return this._events
+    }
+
+    /**
+     * Get the function manager.
+     */
+    get functions() {
+        return this._functions
+    }
+
+    /**
+     * Get the LyteScript interpreter.
+     */
+    get interpreter() {
+        return this._interpreter
     }
 }
