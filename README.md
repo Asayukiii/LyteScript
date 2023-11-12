@@ -1,10 +1,10 @@
-<h1 align="center">NiteScript</h1>
+<h1 align="center">LyteScript</h1>
 A powerful TypeScript library to create Revolt bots with ease.
 
 <h2>Basic Setup</h2>
 
 ```js
-const { Bot } = require('nitescript')
+const { Bot } = require('lytescript')
 
 const client = new Bot({
     token: string,
@@ -13,9 +13,9 @@ const client = new Bot({
 ```
 
 <h2>Syntax</h2>
-NiteScript has a basic syntax to create your codes.
+LyteScript has a basic syntax to create your codes.
 <h3>Prefix</h3>
-Every NiteScript function starts with "@" as prefix. Every text starting with "@"
+Every LyteScript function starts with "@" as prefix. Every text starting with "@"
 will be interpreted as function, if the function doesn't exists, it won't be interpreted.
 <h3>Parameter container</h3>
 Functions can contain parameters or not. Function parameters must be delimited with "[" and "]". Example: @function[inside]

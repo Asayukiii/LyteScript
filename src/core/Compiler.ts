@@ -41,7 +41,7 @@ export class Compiler {
                     if ('[' === char) {
                         func.setName(func.name)
                         type = 'function parameter'
-                    } else if (!isText(char)) {
+                    } else if (!isText(char) && char !== '[') {
                         const fake = new CompiledText
                         fake.set('{CALL_FN_' + calls.length + '}')
                         text.write(char), func.setName(func.name),
