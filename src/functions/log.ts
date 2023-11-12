@@ -7,7 +7,7 @@ export default new NativeFunction({
         {
             name: 'Texts',
             description: 'The texts to log.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: true
         }
     ],

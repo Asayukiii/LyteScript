@@ -7,13 +7,13 @@ export default new NativeFunction({
         {
             name: 'Name',
             description: 'Variable name.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: true
         },
         {
             name: 'ID',
             description: 'User ID.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: false,
             default: 'd.ctx?.user?.id'
         }

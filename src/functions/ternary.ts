@@ -7,19 +7,19 @@ export default new NativeFunction({
         {
             name: 'Condition',
             description: 'Condition to be solved.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: true
         },
         {
             name: 'Then',
             description: 'Text to return if the condition is met.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: true
         },
         {
             name: 'Else',
             description: 'Text to return if the condition is not met.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: true
         }
     ],

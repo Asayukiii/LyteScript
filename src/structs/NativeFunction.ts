@@ -32,7 +32,7 @@ type NativeFunctionOptions = {
         /**
          * Parameter type resolver, default set to "String".
          */
-        resolver?: ParameterType
+        type?: ParameterType
         /**
          * Mark the parameter as required or not.
          */
@@ -55,7 +55,7 @@ export class NativeFunction {
         required: boolean
         compile?: boolean
         unescape?: boolean
-        resolver?: ParameterType
+        type?: ParameterType
         default?: string
     }[]
     execute: (d: Data) => Promise<any>

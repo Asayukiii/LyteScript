@@ -7,7 +7,7 @@ export default new NativeFunction({
         {
             name: 'Text',
             description: 'The text to convert.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: true
         }
     ],

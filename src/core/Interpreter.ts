@@ -1,3 +1,4 @@
+import { Channel } from 'revkit'
 import { Compiler, Data, NativeFunction, ParameterType, Util, unescape } from '../main.js'
 
 export class Interpreter {
@@ -34,20 +35,8 @@ export class Interpreter {
                     const dontParse = (spec && 'compile' in spec && spec.compile === false) ?? false
                     const dontUnescape = (spec && 'unescape' in spec && spec.unescape === false) ?? false
                     const parsedParam: string = dontParse ? param.value : (await this.evaluate(param.value, subdata)).code
-                    let resolved = Util.parse(parsedParam)
-                    if (spec?.resolver === ParameterType.Boolean && ![true, false].includes(resolved)) {
-                        throw new Error('Invalid type provided, expected "Boolean", provided ' + typeof resolved)
-                    } else if (spec?.resolver === ParameterType.Object && typeof resolved !== 'object') {
-                        throw new Error('Invalid type provided, expected "JSON", provided ' + typeof resolved)
-                    } else if (spec?.resolver === ParameterType.Number && isNaN(resolved)) {
-                        throw new Error('Invalid type provided, expected "Number", provided ' + typeof resolved)
-                    } else if (spec?.resolver === ParameterType.Time && data.time.parse(resolved) === null) {
-                        throw new Error('Invalid type provided, expected "Time", provided ' + typeof resolved)
-                    }
                     // Unescaping process.
-                    resolved = dontUnescape ? resolved : Util.parse(unescape(parsedParam))
-                    // Time handling.
-                    resolved = spec?.resolver === ParameterType.Time ? data.time.parse(resolved) : resolved
+                    let resolved = dontUnescape ? parsedParam : unescape(parsedParam)
                     // Parameter overwrite.
                     params.push(resolved), fn.parameters[i].overwrite(resolved)
                 }

@@ -7,13 +7,13 @@ export default new NativeFunction({
         {
             name: 'Name',
             description: 'Variable name.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: true
         },
         {
             name: 'Default',
             description: 'The value to return if the variable does not exists.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: true
         }
     ],

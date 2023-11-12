@@ -7,7 +7,7 @@ export default new NativeFunction({
         {
             name: 'Time',
             description: 'Time to hold code execution.',
-            resolver: ParameterType.Time,
+            type: ParameterType.Time,
             required: true
         }
     ],

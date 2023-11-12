@@ -8,14 +8,14 @@ export default new NativeFunction({
         {
             name: 'Code',
             description: 'JavaScript code to be evaled.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             compile: false,
             required: true
         },
         {
             name: 'return ID',
             description: 'Switch wether return the message ID or not.',
-            resolver: ParameterType.Boolean,
+            type: ParameterType.Boolean,
             required: false,
             default: 'false'
         }

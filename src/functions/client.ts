@@ -7,7 +7,7 @@ export default new NativeFunction({
         {
             name: 'Property',
             description: 'Property name to get.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: true
         }
     ],

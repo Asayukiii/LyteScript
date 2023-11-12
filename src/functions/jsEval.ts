@@ -8,13 +8,13 @@ export default new NativeFunction({
         {
             name: 'Return',
             description: 'Return the evaluation result.',
-            resolver: ParameterType.Boolean,
+            type: ParameterType.Boolean,
             required: true
         },
         {
             name: 'Code',
             description: 'JavaScript code to be evaled.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             compile: false,
             required: true
         }

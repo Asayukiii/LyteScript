@@ -28,19 +28,19 @@ export default new NativeFunction({
         {
             name: 'Name',
             description: 'The command name.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: true
         },
         {
             name: 'Property',
             description: 'The command property to get.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: true
         },
         {
             name: 'Extra',
             description: 'The command property if unknown.',
-            resolver: ParameterType.String,
+            type: ParameterType.String,
             required: false
         }
     ],

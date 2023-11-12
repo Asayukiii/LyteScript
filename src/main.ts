@@ -40,6 +40,7 @@ enum ParameterType {
     Boolean,
     Channel,
     Member,
+    Message,
     Number,
     Object,
     Server,
