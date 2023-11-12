@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "hjson": "^3.2.2",
+    "midb": "^2.0.0",
     "revkit": "^1.1.14"
   }
 }

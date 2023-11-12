@@ -1,6 +1,6 @@
 import { NativeFunction } from '../main.js'
 
-const fn = new NativeFunction({
+export default new NativeFunction({
     name: '@log',
     description: 'Logs something in console.',
     parameters: [
@@ -15,5 +15,3 @@ const fn = new NativeFunction({
         console.log(...texts)
     }
 })
-
-export default fn

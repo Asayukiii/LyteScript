@@ -29,4 +29,5 @@ functions.add('log', {
 const data = new Data({
     functions
 });
-(new Interpreter).evaluate('@log[@sum[12;1]]', data)
+(new Interpreter).evaluate('@log[jola]', data);
+console.log(require('crypto').randomUUID())

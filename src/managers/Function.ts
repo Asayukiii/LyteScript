@@ -1,5 +1,5 @@
 import { NativeFunction } from '../main.js'
-import { lstatSync, readdirSync } from 'fs'
+import { readdirSync } from 'fs'
 import { join } from 'path'
 
 /**

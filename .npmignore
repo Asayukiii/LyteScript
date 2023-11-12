@@ -1,6 +1,8 @@
 # Folders
 /src
 /node_modules
+/database
+/playground
 
 # Files
 pnpm-lock.yaml
