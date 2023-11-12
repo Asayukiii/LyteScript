@@ -1,4 +1,4 @@
-import { NativeFunction } from '../main.js'
+import { NativeFunction, ParameterType } from '../main.js'
 
 export default new NativeFunction({
     name: '@toLowerCase',
@@ -7,7 +7,8 @@ export default new NativeFunction({
         {
             name: 'Text',
             description: 'The text to convert.',
-            resolver: 'String'
+            resolver: ParameterType.String,
+            required: true
         }
     ],
     execute: async function (d) {

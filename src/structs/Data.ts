@@ -1,5 +1,6 @@
-import { Context, FunctionManager, Interpreter, NativeFunction } from '../main.js'
+import { Condition, Context, FunctionManager, Interpreter, NativeFunction } from '../main.js'
 import { CompiledFunction } from './CompiledFunction.js'
+import { TimeParser } from '../utils/TimeParser.js'
 import { CompiledText } from './CompiledText'
 import { MessagePayload } from 'revkit'
 
@@ -8,7 +9,7 @@ import { MessagePayload } from 'revkit'
  */
 type DataOptions = {
     compiled?: {
-        functions: CompiledFunction[],
+        calls: CompiledFunction[],
         texts: CompiledText[]
     }
     interpreter: Interpreter
@@ -27,7 +28,7 @@ type DataOptions = {
 
 export class Data {
     compiled?: {
-        functions: CompiledFunction[],
+        calls: CompiledFunction[],
         texts: CompiledText[]
     }
     interpreter: Interpreter
@@ -41,13 +42,15 @@ export class Data {
     }
     start?: number
     container?: MessagePayload
+    condition = new Condition
+    time = new TimeParser
     cache: Record<string, any>
     constructor(data: DataOptions) {
         this.break = data?.break ?? false
         this.cache = data?.cache ?? {}
         this.code = data?.code ?? ''
         this.compiled = data?.compiled ?? {
-            functions: [],
+            calls: [],
             texts: []
         }
         this.container = data?.container ?? {

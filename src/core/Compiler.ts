@@ -18,7 +18,7 @@ export class Compiler {
      */
     static compile(code: string) {
         let func = new CompiledFunction, text = new CompiledText
-        const functions: CompiledFunction[] = [], texts: CompiledText[] = []
+        const calls: CompiledFunction[] = [], texts: CompiledText[] = []
         let depth = 0, type = 'text'
 
         for (let i = 0; i < code.length; i++) {
@@ -43,9 +43,9 @@ export class Compiler {
                         type = 'function parameter'
                     } else if (!isText(char)) {
                         const fake = new CompiledText
-                        fake.set('{CALL_FN_' + functions.length + '}')
+                        fake.set('{CALL_FN_' + calls.length + '}')
                         text.write(char), func.setName(func.name),
-                        functions.push(func), texts.push(fake)
+                        calls.push(func), texts.push(fake)
                         func = new CompiledFunction, type = 'text'
                     } else func.name += char
                 } else if ('parameter' === kind) {
@@ -54,8 +54,8 @@ export class Compiler {
                             func.appendValue(text.value),
                             text = new CompiledText
                         const fake = new CompiledText
-                        fake.set('{CALL_FN_' + functions.length + '}')
-                        func.setName(func.name), functions.push(func), texts.push(fake)
+                        fake.set('{CALL_FN_' + calls.length + '}')
+                        func.setName(func.name), calls.push(func), texts.push(fake)
                         func = new CompiledFunction, type = 'text'
                     } else if (depth <= 1 && char === ';') {
                         func.appendValue(text.value)
@@ -68,8 +68,8 @@ export class Compiler {
         if (text.value !== '')
             texts.push(text)
         if (func.name !== '')
-            functions.push(func)
+            calls.push(func)
 
-        return { functions, texts }
+        return { calls, texts }
     }
 }

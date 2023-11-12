@@ -1,4 +1,4 @@
-import { Data } from './Data.js'
+import { Data, ParameterType } from '../main.js'
 
 type NativeFunctionOptions = {
     /**
@@ -32,7 +32,15 @@ type NativeFunctionOptions = {
         /**
          * Parameter type resolver, default set to "String".
          */
-        resolver?: 'Boolean' | 'Object' | 'Number' | 'String'
+        resolver?: ParameterType
+        /**
+         * Mark the parameter as required or not.
+         */
+        required: boolean
+        /**
+         * Parameter default value.
+         */
+        default?: string
 
     }[]
     execute: (d: Data) => Promise<any>
@@ -44,8 +52,11 @@ export class NativeFunction {
     parameters?: {
         name: string
         description: string
+        required: boolean
         compile?: boolean
-        resolver?: 'Boolean' | 'Object' | 'Number' | 'String'
+        unescape?: boolean
+        resolver?: ParameterType
+        default?: string
     }[]
     execute: (d: Data) => Promise<any>
     constructor(data: NativeFunctionOptions) {

@@ -17,6 +17,9 @@ export class Condition {
                 let kind = 'left', data = ['', '', '']
                 for (let i = 0; i < or.length; i++) {
                     const char = or[i], next = or[i + 1]
+                    if (this.operators.includes(char) && kind === 'left') {
+                        kind = 'operator'
+                    }
 
                     if (kind === 'left') data[0] += char
                     else if (kind === 'operator') data[1] += char
@@ -33,7 +36,7 @@ export class Condition {
 
                 const [left, operator, right] = data
                 if (!this.isValidSymbol(operator))
-                    throw new Error('Invalid operator, expected some of "' + this.symbols.join(', ') + '"')
+                    throw new Error('Invalid operator, expected some of "' + this.symbols.join(', ') + '".\nProvided "' + operator + '"')
 
                 switch (operator) {
                 case '<': {

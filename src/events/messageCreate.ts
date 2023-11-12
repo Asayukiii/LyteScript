@@ -20,12 +20,11 @@ export default new NativeEvent({
 
         const prefixed = Object.values(client.commands._data).filter(command => command.type === 'message' && command.name)
         let prefixes = typeof client.extraOptions.prefixes === 'string' ? [client.extraOptions.prefixes] : client.extraOptions.prefixes
-        prefixes.map((prefix, i) => {
-            client.interpreter.evaluate(prefix, data)
-            .then((result) => {
-                prefixes[i] = result.code
-            })
-        })
+        for (let i = 0; i < prefixes.length; i++) {
+            const pr = prefixes[i],
+            result = await client.interpreter.evaluate(pr, data)
+            prefixes[i] = result.code
+        }
         let prefix = prefixes.find(pr => message.content.toLowerCase().startsWith(pr.toLowerCase()))
         if (!prefix) return
         const args = message.content.slice(prefix.length).trim().split(' ')

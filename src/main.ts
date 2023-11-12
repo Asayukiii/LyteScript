@@ -10,8 +10,6 @@ import { Data } from './structs/Data.js'
 import { Util } from './utils/Util.js'
 import { Bot } from './structs/Bot.js'
 
-import x from './extenstions' // Extended String prototype.
-
 /**
  * Character escapers to avoid bugs.
  */
@@ -35,6 +33,21 @@ function unescape(text: string) {
     return text
 }
 
+/**
+ * Function parameter type resolvers.
+ */
+enum ParameterType {
+    Boolean,
+    Channel,
+    Member,
+    Number,
+    Object,
+    Server,
+    String,
+    Time,
+    User
+}
+
 export {
     escape, unescape,
     Bot,
@@ -48,5 +61,6 @@ export {
     Interpreter,
     NativeFunction,
     NativeEvent,
+    ParameterType,
     Util
 }

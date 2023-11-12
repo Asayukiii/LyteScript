@@ -1,4 +1,4 @@
-import { Message, Member, Server, User, Channel } from 'revkit'
+import { Message, Member, Server, User, Channel, MessagePayload } from 'revkit'
 import { Bot } from './Bot'
 
 type AnyContext = Message | Member | Server | User | null | undefined
@@ -26,8 +26,7 @@ export class Context {
     get channel() {
         return this.ctx instanceof Channel 
             ? this.ctx : this.ctx instanceof Message
-                ? this.ctx.channel : 'channel' in this.ctx!
-                    ? this.ctx.channel : null
+                ? this.ctx.channel : null
     }
 
     /**
@@ -62,5 +61,16 @@ export class Context {
             ? this.ctx : this.ctx instanceof Message 
                 ? this.ctx.author : this.ctx instanceof Member
                     ? this.ctx.user : null
+    }
+
+    /**
+     * Send a message.
+     * @param message 
+     * @returns 
+     */
+    async send(message: MessagePayload) {
+        if (this.channel) {
+            return await this.channel.send(message)
+        }
     }
 }

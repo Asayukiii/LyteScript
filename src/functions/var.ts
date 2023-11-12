@@ -1,8 +1,8 @@
 import { NativeFunction, ParameterType } from '../main.js'
 
 export default new NativeFunction({
-    name: '@deleteUserVar',
-    description: 'Delete a user variable.',
+    name: '@var',
+    description: 'Creates a environment variable.',
     parameters: [
         {
             name: 'Name',
@@ -11,15 +11,15 @@ export default new NativeFunction({
             required: true
         },
         {
-            name: 'ID',
-            description: 'User ID.',
+            name: 'Value',
+            description: 'Variable value.',
             resolver: ParameterType.String,
             required: false,
-            default: 'd.ctx?.user?.id'
+            default: ''
         }
     ],
     execute: async function (d) {
-        const [name, userID = d.ctx?.user?.id] = d.function!.compiled.parameters.map(t => t.value)
-        return await d.ctx?.bot.db.delete(`${name}_${userID}`)
+        const [key, value = ''] = d.function!.compiled.parameters.map(p => p.value);
+        (d.cache.vars??={})[key] = value
     }
 })

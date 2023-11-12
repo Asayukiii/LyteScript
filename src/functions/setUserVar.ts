@@ -1,4 +1,4 @@
-import { NativeFunction } from '../main.js'
+import { NativeFunction, ParameterType } from '../main.js'
 
 export default new NativeFunction({
     name: '@setUserVar',
@@ -7,17 +7,21 @@ export default new NativeFunction({
         {
             name: 'Name',
             description: 'Variable name.',
-            resolver: 'String'
+            resolver: ParameterType.String,
+            required: true
         },
         {
             name: 'Value',
             description: 'Variable value.',
-            resolver: 'String'
+            resolver: ParameterType.String,
+            required: true
         },
         {
             name: 'ID',
             description: 'User ID.',
-            resolver: 'String'
+            resolver: ParameterType.String,
+            required: false,
+            default: 'd.ctx?.user?.id'
         }
     ],
     execute: async function (d) {
