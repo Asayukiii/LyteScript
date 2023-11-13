@@ -6,6 +6,7 @@ export default new NativeEvent({
     listen: async (client, role: Role) => {
         const commands = Object.values(client.commands._data).filter(command => command.type === 'serverRoleUpdate')
         const data = new Data({
+            client,
             ctx: new Context({
                 role,
                 server: role.server

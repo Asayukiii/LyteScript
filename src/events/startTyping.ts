@@ -12,7 +12,7 @@ export default new NativeEvent({
             user
         }, client)
         const data = new Data({
-            ctx,
+            ctx, client,
             functions: client.functions,
             interpreter: client.interpreter,
             cache: {}

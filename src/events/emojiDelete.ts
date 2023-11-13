@@ -6,6 +6,7 @@ export default new NativeEvent({
     listen: async (client, id: string, emoji: Emoji) => {
         const commands = Object.values(client.commands._data).filter(command => command.type === 'emojiDelete')
         const data = new Data({
+            client,
             ctx: new Context({
                 emoji,
                 user: emoji.creator === undefined ? await emoji.fetchCreator() : emoji.creator

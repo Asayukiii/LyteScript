@@ -6,6 +6,7 @@ export default new NativeEvent({
     listen: async (client, server: Server) => {
         const commands = Object.values(client.commands._data).filter(command => command.type === 'serverCreate')
         const data = new Data({
+            client,
             ctx: new Context({ server }, client),
             functions: client.functions,
             interpreter: client.interpreter,

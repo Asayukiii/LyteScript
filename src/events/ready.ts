@@ -9,7 +9,7 @@ export default new NativeEvent({
             ctx: new Context(null, client),
             functions: client.functions,
             interpreter: client.interpreter,
-            cache: {}
+            cache: {}, client,
         })
         for (const command of commands) {
             await client.interpreter.evaluate(

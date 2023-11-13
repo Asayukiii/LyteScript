@@ -6,6 +6,7 @@ export default new NativeEvent({
     listen: async (client, member: Member) => {
         const commands = Object.values(client.commands._data).filter(command => command.type === 'serverMemberLeave')
         const data = new Data({
+            client,
             ctx: new Context({
                 member,
                 server: member.server,

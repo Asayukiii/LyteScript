@@ -16,6 +16,7 @@ export default new NativeEvent({
             user: message.author,
         }, client)
         const data = new Data({
+            client,
             cache: {}, ctx: context,
             functions: client.functions,
             interpreter: client.interpreter

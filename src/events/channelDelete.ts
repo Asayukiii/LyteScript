@@ -6,6 +6,7 @@ export default new NativeEvent({
     listen: async (client, id: string, channel: Channel) => {
         const commands = Object.values(client.commands._data).filter(command => command.type === 'channelDelete')
         const data = new Data({
+            client,
             ctx: new Context({
                 channel,
                 server: channel.isServerBased() ? channel.server : undefined

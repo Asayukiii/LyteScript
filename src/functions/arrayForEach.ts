@@ -31,6 +31,7 @@ export default new NativeFunction({
         const results: string[] = []
         for (const element of d.cache.arrays[name]) {
             const data = d.extend({
+                client: d.client,
                 functions: d.functions,
                 ctx: d.ctx,
                 cache: { vars: {} },

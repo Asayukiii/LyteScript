@@ -8,7 +8,7 @@ import { MessagePayload } from 'revkit'
  * Data inherit options.
  */
 type DataOptions = {
-    client: Bot
+    client?: Bot
     compiled?: {
         calls: CompiledFunction[],
         texts: CompiledText[]
@@ -28,6 +28,7 @@ type DataOptions = {
 }
 
 export class Data {
+    client?: Bot
     compiled?: {
         calls: CompiledFunction[],
         texts: CompiledText[]
@@ -48,6 +49,7 @@ export class Data {
     cache: Record<string, any>
     constructor(data: DataOptions) {
         this.break = data?.break ?? false
+        this.client = data.client ?? data.ctx?.bot
         this.cache = data?.cache ?? {}
         this.code = data?.code ?? ''
         this.compiled = data?.compiled ?? {
