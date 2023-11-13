@@ -1,4 +1,4 @@
-import { Condition, Context, FunctionManager, Interpreter, NativeFunction } from '../main.js'
+import { Bot, Condition, Context, FunctionManager, Interpreter, NativeFunction } from '../main.js'
 import { CompiledFunction } from './CompiledFunction.js'
 import { TimeParser } from '../utils/TimeParser.js'
 import { CompiledText } from './CompiledText'
@@ -8,6 +8,7 @@ import { MessagePayload } from 'revkit'
  * Data inherit options.
  */
 type DataOptions = {
+    client: Bot
     compiled?: {
         calls: CompiledFunction[],
         texts: CompiledText[]

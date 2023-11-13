@@ -8,7 +8,8 @@ export default new NativeFunction({
             name: 'Condition',
             description: 'The condition to evaluate.',
             type: ParameterType.String,
-            required: true
+            required: true,
+            unescape: false
         },
         {
             name: 'Then',

@@ -8,7 +8,8 @@ export default new NativeFunction({
             name: 'Condition',
             description: 'Condition to be solved.',
             type: ParameterType.String,
-            required: true
+            required: true,
+            unescape: false
         }
     ],
     execute: async function (d) {

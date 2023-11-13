@@ -19,7 +19,8 @@ const escapers = [
     ['#SEMI#', ';'],
     ['#AT#', '@'],
     ['#LEFT#', '['],
-    ['#RIGHT#', ']']
+    ['#RIGHT#', ']'],
+    ['#EXC#', '!']
 ]
 
 function escape(text: string) {
