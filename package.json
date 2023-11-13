@@ -1,5 +1,5 @@
 {
-  "name": "nitescript",
+  "name": "lytescript",
   "version": "0.0.1",
   "description": "A powerful TypeScript library to create Revolt bots with ease.",
   "main": "./dist/main.js",
