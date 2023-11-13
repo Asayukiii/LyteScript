@@ -12,7 +12,9 @@ export default new NativeFunction({
         }
     ],
     execute: async function (d) {
-        const [time] = d.function!.compiled.parameters.map(t => t.value) as unknown as [number]
-        await new Promise(res => setTimeout(res, time))
+        const [time] = d.function!.compiled.parameters.map(t => t.value)
+        const parsed = d.time.parse(time)
+        if (!parsed) throw new Error('Invalid time provided in: ' + d.function?.compiled.name)
+        await new Promise(res => setTimeout(res, parsed))
     }
 })

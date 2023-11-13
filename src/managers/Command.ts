@@ -4,10 +4,11 @@ import { randomUUID } from 'crypto'
 import { join } from 'path'
 
 export interface ICommand {
+    type: keyof ClientEvents
+    code: string
     name?: string
     aliases?: string[]
-    type?: keyof ClientEvents
-    code: string
+    __path__?: string
 }
 
 /**
@@ -17,34 +18,38 @@ export class CommandManager {
     _data: Record<string, ICommand> = {}
 
     /**
-     * Add a native function to the manager.
-     * @param name Native function name.
-     * @param data Native function data.
+     * Add multiple commands into the manager.
+     * @param data Command objects.
      */
-    add(name: string, data: Omit<ICommand, 'name'>) {
-        this._data[name] = data
+    add(...commands: ICommand[]) {
+        for (let command of commands) {
+            command.__path__ = 'LyteScript:MAIN_FILE'
+            const name = command.name ?? randomUUID()
+            if (!command.name) command.name = name
+            this.import(name, command)
+        }
         return this
     }
 
     /**
-     * Get a native function.
-     * @param name Native function name.
+     * Get a command.
+     * @param name command name.
      */
     get(name: string) {
         return this._data[name] ?? undefined
     }
 
     /**
-     * Check if the provided function name exists.
-     * @param name Native function name.
+     * Check if the provided command name exists.
+     * @param name command name.
      */
     exists(name: string) {
         return name in this._data
     }
 
     /**
-     * Delete a function from the manager.
-     * @param name Native function name.
+     * Delete a command from the manager.
+     * @param name command name.
      */
     delete(name: string) {
         delete this._data[name]
@@ -52,7 +57,7 @@ export class CommandManager {
     }
 
     /**
-     * Delete all functions from the manager.
+     * Delete all commands from the manager.
      */
     cleanup() {
         this._data = {}
@@ -60,7 +65,7 @@ export class CommandManager {
     }
 
     /**
-     * Load all native functions.
+     * Load all commands.
      * @param {string} [dir='commands'] Command path.
      */
     async load(dir = 'commands') {
@@ -71,11 +76,27 @@ export class CommandManager {
                 await this.load(join(dir, file))
                 continue
             } else if (file.endsWith('.js')) {
-                const command: ICommand | ICommand[] = require(join(root, dir, file)).default
+                let command: ICommand | ICommand[] = require(join(root, dir, file)).default
                 if (command && Array.isArray(command)) {
-                    command.forEach(cmd => this.add(cmd.name ?? randomUUID(), cmd))
-                } else if (command) this.add(command.name ?? randomUUID(), command)
+                    command.forEach(cmd => {
+                        if (!cmd.__path__) cmd.__path__ = join(root, dir, file)
+                        this.import(cmd.name ?? randomUUID(), cmd)
+                    })
+                } else if (command) {
+                    if (!command.__path__) command.__path__ = join(root, dir, file)
+                    this.import(command.name ?? randomUUID(), command)
+                }
             }
         }
+    }
+
+    /**
+     * Import a command to the manager.
+     * @param name command name.
+     * @param data command data.
+     */
+    private import(name: string, data: Omit<ICommand, 'name'>) {
+        this._data[name ?? randomUUID()] = data
+        return this
     }
 }

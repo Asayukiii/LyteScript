@@ -43,6 +43,7 @@ type NativeFunctionOptions = {
         default?: string
 
     }[]
+    __path__?: string
     execute: (d: Data) => Promise<any>
 }
 
@@ -58,6 +59,7 @@ export class NativeFunction {
         type?: ParameterType
         default?: string
     }[]
+    __path__?: string
     execute: (d: Data) => Promise<any>
     constructor(data: NativeFunctionOptions) {
         this.name = data.name

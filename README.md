@@ -30,7 +30,8 @@ Add your commands in your main file.
 
 ```js
 const bot = new Bot({...})
-bot.commands.add('ping', {
+bot.commands.add({
+    name: 'ping',
     type: 'message',
     code: `
         @sendMessage[
@@ -76,14 +77,15 @@ const bot = new Bot({
     ],
     prefixes: ['!']
 })
-bot.commands.add('ping', {
+bot.commands.add({
+    name: 'ping',
     type: 'message',
     code: `
         @sendMessage[
             @setContent[Pong! <#AT#@author[id]>]
         ]
     `
-}).add('default_command', {
+}).add({
     type: 'ready',
     code: `
         @log[Client started: Name => @client[name]]
@@ -106,7 +108,7 @@ const bot = new Bot({
     prefixes: ['!']
 })
 
-bot.commands.add('default_command', {
+bot.commands.add({
     type: 'ready',
     code: `
         @setVar[msg;Hello world!]
@@ -120,7 +122,8 @@ Function Manager provides the possibility for adding your own functions.
 
 ```js
 const bot = new Bot({...})
-bot.functions.add('multipleSum', {
+bot.functions.add({
+    name: 'multipleSum',
     description: 'Sum multiple numbers.',
     parameters: [
         {

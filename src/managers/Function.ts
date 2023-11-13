@@ -9,16 +9,14 @@ export class FunctionManager {
     _data: Record<string, Omit<NativeFunction, 'name'>> = {}
 
     /**
-     * Add a native function to the manager.
-     * @param name Native function name.
-     * @param data Native function data.
+     * Add a function into the manager.Ñ
+     * @param functions 
      */
-    add(name: string, data: Omit<NativeFunction, 'name'>) {
-        this._data[
-            name.startsWith('@')
-                ? name.toLowerCase() 
-                : '@' + name.toLowerCase()
-        ] = data
+    add(...functions: NativeFunction[]) {
+        for (let fn of functions) {
+            if (fn.__path__) fn.__path__ = 'LyteScript:MAIN_FILE'
+            this.import(fn.name, fn)
+        }
         return this
     }
 
@@ -70,9 +68,24 @@ export class FunctionManager {
         const root = __dirname.replace('managers', 'functions')
         readdirSync(root).forEach(file => {
             if (file.endsWith('.js')) {
-                const fn: NativeFunction = require(join(root, file)).default
-                if (fn) this.add(fn.name, fn)
+                let fn: NativeFunction = require(join(root, file)).default
+                if (fn) {
+                    fn.__path__ = join(root, file)
+                    this.import(fn.name, fn)
+                }
             }
         })
+    }
+
+    /**
+     * @private Add a native function to the manager.
+     * @param name Native function name.
+     * @param data Native function data.
+     */
+    private import(name: string, data: NativeFunction) {
+        const nome = name.startsWith('@') ? name.toLowerCase() : '@' + name.toLowerCase()
+        if (!data.name) data.name = nome
+        this._data[nome] = data
+        return this
     }
 }

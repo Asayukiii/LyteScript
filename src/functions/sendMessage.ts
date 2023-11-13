@@ -27,13 +27,15 @@ export default new NativeFunction({
             content: '',
             embeds: [] as any[]
         }
-        data.functions?.add('@setContent', {
+        data.functions?.add({
+            name: '@setContent',
             async execute(t) {
                 const [content] = t.function!.compiled.parameters.map(x => x.value)
                 payload.content += content
             }
         })
-        .add('@appendEmbed', {
+        .add({
+            name: '@appendEmbed',
             parameters: [{
                 name: 'Builders',
                 description: 'Embed builders.',
@@ -44,19 +46,22 @@ export default new NativeFunction({
                 const [builders] = t.function!.compiled.parameters.map(x => x.value)
                 const embed = new EmbedBuilder
                 const subdata = data.extend({...data})
-                subdata.functions?.add('@setTitle', {
+                subdata.functions?.add({
+                    name: '@setTitle',
                     async execute(x) {
                         const [title] = x.function!.compiled.parameters.map(x => x.value)
                         embed.setTitle(title)
                     }
                 })
-                .add('@setDescription', {
+                .add({
+                    name: '@setDescription',
                     async execute(x) {
                         const [description] = x.function!.compiled.parameters.map(x => x.value)
                         embed.setDescription(description)
                     }
                 })
-                .add('@setIconURL', {
+                .add({
+                    name: '@setIconURL',
                     async execute(x) {
                         const [icon] = x.function!.compiled.parameters.map(x => x.value)
                         embed.setIconURL(icon)
