@@ -1,4 +1,5 @@
 import { Client, ClientEvents, ClientOptions } from 'revkit'
+import { VariableManager } from '../managers/Variable.js'
 import { FunctionManager, Interpreter } from '../main.js'
 import { CommandManager } from '../managers/Command.js'
 import { EventManager } from '../managers/Event.js'
@@ -22,6 +23,7 @@ export class Bot extends Client {
     private _events = new EventManager
     private _interpreter = new Interpreter
     private _functions = new FunctionManager
+    private _vars: VariableManager
     private _db: Database
     extraOptions: BotOptions
     constructor(data: BotOptions) {
@@ -31,6 +33,16 @@ export class Bot extends Client {
         this.functions.loadNatives()
         this.events.loadNatives(data.events ?? [], this)
         this._db.start()
+        this._vars = new VariableManager(data.database?.tables ?? ['main'], this._db)
+    }
+
+    /**
+     * Set the client variables.
+     * @param data Variable entries.
+     * @param table Table name.
+     */
+    variables(data: Record<string, any>, table = 'main') {
+        return this.vars.fillTable(data, table)
     }
 
     /**
@@ -66,5 +78,12 @@ export class Bot extends Client {
      */
     get interpreter() {
         return this._interpreter
+    }
+
+    /**
+     * Get the variable manager.
+     */
+    get vars() {
+        return this._vars
     }
 }
