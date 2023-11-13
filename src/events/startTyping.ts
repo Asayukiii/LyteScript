@@ -5,7 +5,12 @@ export default new NativeEvent({
     name: 'channelStartTyping',
     listen: async (client, user: User, channel: Channel) => {
         const commands = Object.values(client.commands._data).filter(command => command.type === 'channelStartTyping')
-        const ctx = new Context({ channel, user }, client)
+        const ctx = new Context({
+            channel,
+            member: channel.isServerBased() ? channel.server.members.get(user.id) : undefined,
+            server: channel.isServerBased() ? channel.server : undefined,
+            user
+        }, client)
         const data = new Data({
             ctx,
             functions: client.functions,

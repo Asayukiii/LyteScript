@@ -6,7 +6,10 @@ export default new NativeEvent({
     listen: async (client, channel: Channel) => {
         const commands = Object.values(client.commands._data).filter(command => command.type === 'channelCreate')
         const data = new Data({
-            ctx: new Context({ channel }, client),
+            ctx: new Context({
+                channel,
+                server: channel.isServerBased() ? channel.server : undefined
+            }, client),
             functions: client.functions,
             interpreter: client.interpreter,
             cache: {}

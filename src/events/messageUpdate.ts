@@ -5,8 +5,13 @@ export default new NativeEvent({
     name: 'messageUpdate',
     listen: async (client, message: BaseMessage) => {
         const commands = Object.values(client.commands._data).filter(command => command.type === 'messageUpdate')
+        const context = new Context({
+            channel: message.channel,
+            message,
+            server: message.server
+        }, client)
         const data = new Data({
-            ctx: new Context({ message }, client),
+            ctx: context,
             functions: client.functions,
             interpreter: client.interpreter,
             cache: {}
