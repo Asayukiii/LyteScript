@@ -31,4 +31,18 @@ export class Util {
             }
         }
     }
+
+    /**
+     * Shuffles an array.
+     * @param array Array to be affected.
+     * @returns {any[]}
+     */
+    static arrayShuffle(array: any[]): any[] {
+        let cloned = [...array]
+        for (let i = 0; i < array.length; i--) {
+            const random = Math.floor(Math.random() * (cloned.length + 1)) as number
+            [cloned[i], cloned[random]] = [cloned[random], cloned[i]]
+        }
+        return cloned
+    }
 }
