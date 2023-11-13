@@ -1,15 +1,28 @@
 {
   "name": "nitescript",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "A powerful TypeScript library to create Revolt bots with ease.",
   "main": "./dist/main.js",
   "scripts": {
     "lint": "eslint . --ext .ts --fix",
     "compile": "tsc -p tsconfig.json -w"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "bdfd",
+    "aoi.js",
+    "aoijs",
+    "dbd.js",
+    "dbdjs",
+    "bot designer for discord",
+    "revolt.js",
+    "revkit",
+    "revolt.io",
+    "revolt.chat",
+    "revolt",
+    "voltare"
+  ],
+  "author": "Asayukiii",
+  "license": "Apache-2.0",
   "devDependencies": {
     "@types/hjson": "^2.4.6",
     "@types/node": "^20.9.0",
