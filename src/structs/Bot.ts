@@ -22,15 +22,15 @@ export class Bot extends Client {
     private _events = new EventManager
     private _interpreter = new Interpreter
     private _functions = new FunctionManager
-    db: Database
+    private _db: Database
     extraOptions: BotOptions
     constructor(data: BotOptions) {
         super(data)
-        this.db = new Database(data.database)
+        this._db = new Database(data.database)
         this.extraOptions = data
         this.functions.loadNatives()
         this.events.loadNatives(data.events ?? [], this)
-        this.db.start()
+        this._db.start()
     }
 
     /**
@@ -38,6 +38,13 @@ export class Bot extends Client {
      */
     get commands() {
         return this._commands
+    }
+
+    /**
+     * Get the database.
+     */
+    get db() {
+        return this._db
     }
 
     /**
