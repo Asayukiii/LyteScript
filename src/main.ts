@@ -16,7 +16,7 @@ import { Bot } from './structs/Bot.js'
 const escapers = [
     ['#COLON#', ':'],
     ['#SEMI#', ';'],
-    ['#DOL#', '$'],
+    ['#AT#', '@'],
     ['#LEFT#', '['],
     ['#RIGHT#', ']']
 ]

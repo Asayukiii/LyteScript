@@ -1,12 +1,12 @@
 import { Context, Data, NativeEvent } from '../main.js'
-import { Member } from 'revkit'
+import { Emoji } from 'revkit'
 
 export default new NativeEvent({
-    name: 'serverMemberJoin',
-    listen: async (client, member: Member) => {
-        const commands = Object.values(client.commands._data).filter(command => command.type === 'serverMemberJoin')
+    name: 'emojiDelete',
+    listen: async (client, id: string, emoji: Emoji) => {
+        const commands = Object.values(client.commands._data).filter(command => command.type === 'emojiDelete')
         const data = new Data({
-            ctx: new Context({ member }, client),
+            ctx: new Context({ emoji }, client),
             functions: client.functions,
             interpreter: client.interpreter,
             cache: {}

@@ -8,7 +8,7 @@ export default new NativeEvent({
     listen: async (client, message: Message) => {
         if (message.author.bot) return
         const unprefixed = Object.values(client.commands._data).filter(command => command.type === 'message' && !command.name)
-        const context = new Context(message, client)
+        const context = new Context({ message }, client)
         const data = new Data({
             cache: {}, ctx: context,
             functions: client.functions,

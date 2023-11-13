@@ -1,12 +1,12 @@
 import { Context, Data, NativeEvent } from '../main.js'
-import { Member } from 'revkit'
+import { Server } from 'revkit'
 
 export default new NativeEvent({
-    name: 'serverMemberJoin',
-    listen: async (client, member: Member) => {
-        const commands = Object.values(client.commands._data).filter(command => command.type === 'serverMemberJoin')
+    name: 'serverCreate',
+    listen: async (client, server: Server) => {
+        const commands = Object.values(client.commands._data).filter(command => command.type === 'serverCreate')
         const data = new Data({
-            ctx: new Context({ member }, client),
+            ctx: new Context({ server }, client),
             functions: client.functions,
             interpreter: client.interpreter,
             cache: {}

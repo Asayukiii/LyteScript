@@ -1,7 +1,17 @@
-import { Message, Member, Server, User, Channel, MessagePayload } from 'revkit'
+import { BaseMessage, Message, Member, Server, User, Channel, MessagePayload, Emoji, Role, ServerChannel } from 'revkit'
 import { Bot } from './Bot'
 
-type AnyContext = Message | Member | Server | User | null | undefined
+type ContextData = {
+    channel?: Channel | ServerChannel
+    emoji?: Emoji
+    member?: Member
+    message?: BaseMessage | Message
+    role?: Role
+    server?: Server
+    user?: User
+}
+
+type AnyContext = ContextData | null | undefined
 
 export class Context {
     public args: string[] = []
@@ -24,43 +34,35 @@ export class Context {
      * Points to the current channel.
      */
     get channel() {
-        return this.ctx instanceof Channel 
-            ? this.ctx : this.ctx instanceof Message
-                ? this.ctx.channel : null
+        return this.ctx?.channel ?? this.ctx?.message?.channel ?? null
     }
 
     /**
      * Points to the message author as member.
      */
     get member() {
-        return this.ctx instanceof Member ? this.ctx : null
+        return this.ctx?.member ?? null
     }
 
     /**
      * Points to the message.
      */
     get message() {
-        return this.ctx instanceof Message ? this.ctx : null
+        return this.ctx?.message ?? null
     }
 
     /**
      * Points to the current server.
      */
     get server() {
-        return this.ctx instanceof Server
-            ? this.ctx : this.ctx instanceof Message
-                ? this.ctx.server : 'server' in this.ctx!
-                    ? this.ctx.server : null
+        return this.ctx?.server ?? this.ctx?.message?.server ?? null
     }
 
     /**
      * Points to the message author user.
      */
     get user() {
-        return this.ctx instanceof User 
-            ? this.ctx : this.ctx instanceof Message 
-                ? this.ctx.author : this.ctx instanceof Member
-                    ? this.ctx.user : null
+        return this.ctx?.user ?? this.ctx?.member?.user ?? null
     }
 
     /**
