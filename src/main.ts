@@ -9,6 +9,7 @@ import { Compiler } from './core/Compiler.js'
 import { Data } from './structs/Data.js'
 import { Util } from './utils/Util.js'
 import { Bot } from './structs/Bot.js'
+import { DatabaseOptions } from 'midb'
 
 /**
  * Character escapers to avoid bugs.
@@ -57,6 +58,7 @@ export {
     CommandManager,
     Compiler,
     Data,
+    DatabaseOptions,
     FunctionManager,
     ICommand,
     Interpreter,
