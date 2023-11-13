@@ -11,9 +11,15 @@ const properties = {
 } as Record<string, CallableFunction>
 
 export default new NativeFunction({
-    name: '@author',
-    description: 'Returns an author property.',
+    name: '@user',
+    description: 'Returns a user property.',
     parameters: [
+        {
+            name: 'User ID',
+            description: 'The user to get the property from.',
+            type: ParameterType.String,
+            required: true
+        },
         {
             name: 'Property',
             description: 'Property name to get.',
@@ -22,9 +28,10 @@ export default new NativeFunction({
         }
     ],
     execute: async function (d) {
-        const [property] = d.function!.compiled.parameters.map(t => t.value.toLowerCase())
-        if (!Object.keys(properties).includes(property.toLowerCase()))
+        const [userID, property] = d.function!.compiled.parameters.map(t => t.value.toUpperCase())
+        if (!Object.keys(properties).map(x => x.toUpperCase()).includes(property))
             throw new Error('Invalid user property in: ' + d.function?.compiled.name)
-        return properties[property.toLowerCase()](d.ctx?.user)
+        const user = d.ctx?.bot.users.get(userID) ?? d.ctx?.user
+        return properties[property.toLowerCase()](user)
     }
 })

@@ -24,13 +24,13 @@ const escapers = [
 
 function escape(text: string) {
     for (const escaper of escapers)
-        text = text.toString().replace(new RegExp(`${escaper[1]}`, 'ig'), escaper[0])
+        text = text.replace(new RegExp(`${escaper[1]}`, 'ig'), escaper[0])
     return text
 }
 
 function unescape(text: string) {
     for (const escaper of escapers)
-        text = text.toString().replace(new RegExp(`${escaper[0]}`, 'ig'), escaper[1])
+        text = text.replace(new RegExp(`${escaper[0]}`, 'ig'), escaper[1])
     return text
 }
 

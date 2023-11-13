@@ -42,7 +42,7 @@ export class Interpreter {
                 }
             }
             const result = await func.execute(data)
-            parsed[parsed.length] = result === undefined ? '' : result
+            parsed[parsed.length] = result === undefined ? '' : typeof result === 'object' ? JSON.stringify(result) : typeof result !== 'string' ? result.toString() : result
         }
 
         parsed.forEach((text, i) => {
