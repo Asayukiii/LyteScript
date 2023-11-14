@@ -4,6 +4,7 @@ import { FunctionManager, Interpreter } from '../main.js'
 import { CommandManager } from '../managers/Command.js'
 import { EventManager } from '../managers/Event.js'
 import { Database, DatabaseOptions } from 'midb'
+import { CustomEvent } from './CustomEvent.js'
 
 /**
  * Bot constructor options.
@@ -25,6 +26,7 @@ export class Bot extends Client {
     private _functions = new FunctionManager
     private _vars: VariableManager
     private _db: Database
+    customEvent: CustomEvent | null = null
     extraOptions: BotOptions
     constructor(data: BotOptions) {
         super(data)

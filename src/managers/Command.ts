@@ -1,10 +1,10 @@
 import { lstatSync, readdirSync } from 'fs'
-import { ClientEvents } from 'revkit'
+import { Client, ClientEvents } from 'revkit'
 import { randomUUID } from 'crypto'
 import { join } from 'path'
 
-export interface ICommand {
-    type: keyof ClientEvents
+export interface ICommand<T = ClientEvents | string> {
+    type: T extends ClientEvents ? keyof ClientEvents : string
     code: string
     name?: string
     aliases?: string[]
@@ -14,14 +14,14 @@ export interface ICommand {
 /**
  * Represents a command manager.
  */
-export class CommandManager {
-    _data: Record<string, ICommand> = {}
+export class CommandManager<T extends ICommand = ICommand> {
+    _data: Record<string, T> = {}
 
     /**
      * Add multiple commands into the manager.
      * @param data Command objects.
      */
-    add(...commands: ICommand[]) {
+    add(...commands: T[]) {
         for (let command of commands) {
             command.__path__ = 'LyteScript:MAIN_FILE'
             const name = command.name ?? randomUUID()
@@ -76,7 +76,7 @@ export class CommandManager {
                 await this.load(join(dir, file))
                 continue
             } else if (file.endsWith('.js')) {
-                let command: ICommand | ICommand[] = require(join(root, dir, file)).default
+                let command: T | T[] = require(join(root, dir, file)).default
                 if (command && Array.isArray(command)) {
                     command.forEach(cmd => {
                         if (!cmd.__path__) cmd.__path__ = join(root, dir, file)
@@ -95,7 +95,7 @@ export class CommandManager {
      * @param name command name.
      * @param data command data.
      */
-    private import(name: string, data: Omit<ICommand, 'name'>) {
+    private import(name: string, data: T) {
         this._data[name ?? randomUUID()] = data
         return this
     }

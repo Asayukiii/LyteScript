@@ -25,6 +25,7 @@
   "license": "Apache-2.0",
   "devDependencies": {
     "@types/hjson": "^2.4.6",
+    "@types/lodash": "^4.14.201",
     "@types/node": "^20.9.0",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
@@ -38,7 +39,9 @@
   },
   "dependencies": {
     "hjson": "^3.2.2",
+    "lodash": "^4.17.21",
     "midb": "^2.0.0",
-    "revkit": "^1.1.14"
+    "revkit": "^1.1.14",
+    "tiny-typed-emitter": "^2.1.0"
   }
 }
