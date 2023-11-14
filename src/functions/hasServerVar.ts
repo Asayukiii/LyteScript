@@ -20,6 +20,6 @@ export default new NativeFunction({
     ],
     execute: async function (d) {
         const [name, serverId = d.ctx?.server?.id] = d.function!.compiled.parameters.map(t => t.value)
-        await d.ctx?.bot.db.has(`${name}_${serverId}`)
+        return await d.client?.vars.has(`${name}_${serverId}`)
     }
 })

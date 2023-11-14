@@ -20,6 +20,6 @@ export default new NativeFunction({
     ],
     execute: async function (d) {
         const [name, channelID = d.ctx?.channel?.id] = d.function!.compiled.parameters.map(t => t.value)
-        await d.ctx?.bot.db.get(`${name}_${channelID}`)
+        return await d.client?.vars.get(`${name}_${channelID}`)
     }
 })

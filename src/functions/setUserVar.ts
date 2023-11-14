@@ -26,6 +26,6 @@ export default new NativeFunction({
     ],
     execute: async function (d) {
         const [name, value, userID = d.ctx?.user?.id] = d.function!.compiled.parameters.map(t => t.value)
-        await d.ctx?.bot.db.set(`${name}_${userID}`, value)
+        await d.client?.vars.set(`${name}_${userID}`, value)
     }
 })
