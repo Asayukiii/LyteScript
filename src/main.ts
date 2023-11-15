@@ -2,6 +2,7 @@ import { CommandManager, ICommand } from './managers/Command.js'
 import { NativeFunction } from './structs/NativeFunction.js'
 import { FunctionManager } from './managers/Function.js'
 import { NativeEvent } from './structs/NativeEvent.js'
+import { CustomEvent } from './structs/CustomEvent.js'
 import { Interpreter } from './core/Interpreter.js'
 import { Condition } from './core/Condition.js'
 import { Context } from './structs/Context.js'
@@ -58,6 +59,7 @@ export {
     Context,
     CommandManager,
     Compiler,
+    CustomEvent,
     Data,
     DatabaseOptions,
     FunctionManager,
