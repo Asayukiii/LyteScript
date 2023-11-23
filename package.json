@@ -1,6 +1,6 @@
 {
   "name": "lytescript",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "A powerful TypeScript library to create Revolt bots with ease.",
   "main": "./dist/main.js",
   "scripts": {

@@ -25,8 +25,8 @@ export default new NativeFunction({
     ],
     execute: async function (d) {
         const [text, match, replacer] = d.function!.compiled.parameters.map(t => t.value)
-        const args = text.split(' ')
-        const found = [...args].reverse().find(split => split.includes(split))
+        const args = text.split(' '), reversed = [...args].reverse()
+        const found = reversed.find(split => reversed.includes(split))
         const idx = args.lastIndexOf(found ?? '')
         if (idx !== -1) {
             args[idx] = args[idx]?.replace(new RegExp(`${match}`), replacer)
