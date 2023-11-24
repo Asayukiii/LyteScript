@@ -1,3 +1,5 @@
+import { parse } from 'hjson'
+
 export class Util {
     /**
      * Check if the provided text is BigInt-parseable.
@@ -6,6 +8,22 @@ export class Util {
      */
     static isBigInt(text: string) {
         return text.match(/^-?\d+n$/) !== null
+    }
+
+    /**
+     * Check if the string json is parseable.
+     * @param text String JSON.
+     * @returns {boolean}
+     */
+    static isJSONParseable(text: string) {
+        if (!text.startsWith('{') && !text.endsWith('}'))
+            return false
+        try {
+            parse(text)
+            return true
+        } catch {
+            return false
+        }
     }
 
     /**
