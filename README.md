@@ -143,4 +143,10 @@ bot.functions.add({
 })
 ```
 
+<h2>Useful resources</h2>
+<ul>
+    <li><a href="https://rvlt.gg/TY2nkSrb"> Revolt Server</a></li>
+    <li><a href="https://lytescript.js.org/docs"> Guide</a></li>
+</ul>
+
 <h2>⚠️ This library reads from top to bottom and never the opposite.</h2>
